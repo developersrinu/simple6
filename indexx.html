@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laptop Store</title>
+</head>
+<body>
+    <h1>Laptop Store</h1>
+    
+    <h2>Filters</h2>
+    <div>
+        <h3>Brand</h3>
+        <label><input type="checkbox" name="brand" value="Dell">Dell</label>
+        <label><input type="checkbox" name="brand" value="HP">HP</label>
+        <label><input type="checkbox" name="brand" value="Lenovo">Lenovo</label>
+    </div>
+    
+    <div>
+        <h3>Processor</h3>
+        <label><input type="checkbox" name="processor" value="Intel Core i5">Intel Core i5</label>
+        <label><input type="checkbox" name="processor" value="Intel Core i7">Intel Core i7</label>
+        <label><input type="checkbox" name="processor" value="AMD Ryzen 5">AMD Ryzen 5</label>
+    </div>
+    
+    <div>
+        <h3>Price Range</h3>
+        <label><input type="checkbox" name="price" value="500-800">$500 - $800</label>
+        <label><input type="checkbox" name="price" value="800-1200">$800 - $1200</label>
+        <label><input type="checkbox" name="price" value="1200-1500">$1200 - $1500</label>
+    </div>
+
+    <h2>Filtered Products</h2>
+    <ul id="product-list">
+        <!-- Product items will be dynamically added here based on filtering -->
+    </ul>
+
+    <script>
+        // Sample product data
+const products = [
+    { brand: 'Dell', processor: 'Intel Core i5', price: 700 },
+    { brand: 'HP', processor: 'Intel Core i7', price: 1100 },
+    { brand: 'Lenovo', processor: 'AMD Ryzen 5', price: 850 },
+    { brand: 'Dell', processor: 'Intel Core i7', price: 1300 },
+    { brand: 'HP', processor: 'AMD Ryzen 5', price: 950 },
+    { brand: 'Lenovo', processor: 'Intel Core i5', price: 600 },
+];
+
+function updateProductList() {
+    // Get selected checkbox values for each attribute
+    const selectedBrands = Array.from(document.querySelectorAll('input[name="brand"]:checked')).map(checkbox => checkbox.value);
+    const selectedProcessors = Array.from(document.querySelectorAll('input[name="processor"]:checked')).map(checkbox => checkbox.value);
+    const selectedPrices = Array.from(document.querySelectorAll('input[name="price"]:checked')).map(checkbox => checkbox.value);
+
+    // Filter products based on selected attributes
+    const filteredProducts = products.filter(product => {
+        return (
+            (selectedBrands.length === 0 || selectedBrands.includes(product.brand)) &&
+            (selectedProcessors.length === 0 || selectedProcessors.includes(product.processor)) &&
+            (selectedPrices.length === 0 || selectedPrices.includes(getPriceRange(product.price)))
+        );
+    });
+
+    // Display filtered products
+    const productListElement = document.getElementById('product-list');
+    productListElement.innerHTML = '';
+
+    filteredProducts.forEach(product => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${product.brand} | ${product.processor} | $${product.price}`;
+        productListElement.appendChild(listItem);
+    });
+}
+
+function getPriceRange(price) {
+    if (price >= 500 && price <= 800) return '500-800';
+    if (price > 800 && price <= 1200) return '800-1200';
+    if (price > 1200 && price <= 1500) return '1200-1500';
+    return 'unknown';
+}
+
+// Add event listeners to checkboxes
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+checkboxes.forEach(checkbox => checkbox.addEventListener('change', updateProductList));
+
+// Initial update to display all products
+updateProductList();
+
+    </script>
+</body>
+</html>

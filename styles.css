@@ -1,0 +1,74 @@
+/* Write styles here */
+*{
+    padding:0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+body{
+    overflow: hidden;
+}
+.header{
+
+    min-width: 1728px;
+    height: 95px;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center ;
+    color: white;
+    
+    overflow: hidden;
+}
+.header-items{
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+.hero-section{
+   position: relative;
+   top: 100px;
+   left: 200px;
+   
+
+}
+#p1{
+   columns: black;
+   width: 389px;
+   height: 97px;
+   font-size: 80px;
+
+}
+#p2{
+    columns: black;
+    width: 762px;
+    height: 36px;
+    font-size: 30px;
+ 
+}
+#login-bth{
+    margin-top: 20px;
+    width: 205px;
+    height: 56px;
+    color: white;
+    font-size: 20px;
+    background-color: black;
+
+}
+#signup-bth{
+    margin-top: 20px;
+    width: 205px;
+    height: 56px;
+    color: black;
+    font-size: 20px;
+    background-color: transparent;
+    
+}
+#main-img{
+    width: 800px;
+    height: 600px;
+    /* border: 2px solid black ; */
+    position: absolute;
+    right: 100px;
+    top :140px;
+
+}
